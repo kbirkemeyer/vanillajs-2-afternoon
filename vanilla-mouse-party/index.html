@@ -71,9 +71,9 @@ window.addEventListener('mousemove', function(mouseMoveEvent){
 })
 
 function draw(){
-    return setInterval (cb, )
-    let container = document.getElementById("wrap").value;
-    const color = `background:rgb(${getRandomNumber(
+    return setInterval (function() {
+        let container = document.getElementById("wrap").value;
+        const color = `background:rgb(${getRandomNumber(
             0,
             255
         )},${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)});`;
@@ -88,6 +88,7 @@ function draw(){
             mousePosition.y
         )}px; `;
         const style = `${left}${top}${color}${size}`;
+
     const ball = document.createElement("div");
     ball.classList.add("ball");
     ball.style = style;
@@ -95,7 +96,16 @@ function draw(){
     ball.addEventListener("animationend", function (e){
         e.target.remove();
     })
+    container.appendChild(ball);
+}, 50);
 }
+
+window.addEventListener("mouseover", function() {
+    drawId = draw();
+});
+window.addEventListener("mouseout", function(){
+    clearInterval (drawId);
+});
 </script>
 
 </html>
